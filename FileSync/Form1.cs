@@ -24,7 +24,7 @@ namespace FileSync
         public int QtdeArquivos = 0;
         public frmFileSync()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
 
 
@@ -47,6 +47,11 @@ namespace FileSync
 
         private void btnIniciar_Click(object sender, EventArgs e)
         {
+            IniciarSync();            
+        }
+
+        public void IniciarSync()
+        {
             if (!CheckConfig())
             {
                 return;
@@ -56,7 +61,7 @@ namespace FileSync
                 SalvarConfiguracao(false);
                 bw.RunWorkerAsync();
                 btnIniciar.Tag = 1;
-                atualizatela(QtdeArquivos,"");
+                atualizatela(QtdeArquivos, "");
 
             }
             else
@@ -65,7 +70,6 @@ namespace FileSync
                 btnIniciar.Tag = 0;
             }
             ConfigUI();
-            
         }
 
         private bool CheckConfig()
@@ -105,6 +109,8 @@ namespace FileSync
 
             return ret;
         }
+
+
 
         public void MostraErro(String msg)
         {
@@ -209,6 +215,13 @@ namespace FileSync
             btnIniciar.Tag = 0;
             atualizatela = new DelegateAtualizaTela(AtualizaTela);
             CarregarConfiguracao();
+            String[] args = Environment.GetCommandLineArgs();
+           
+            if ( Array.FindIndex(args, x=> x.Equals("autostart",StringComparison.InvariantCultureIgnoreCase)) >= 0)                                            
+            {                
+                IniciarSync();
+            }
+
 
         }
 

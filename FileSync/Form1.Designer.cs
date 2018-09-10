@@ -68,7 +68,7 @@
             this.label1.Size = new System.Drawing.Size(514, 60);
             this.label1.TabIndex = 0;
             this.label1.Text = "Este programa sincroniza arquivos copiando/movendo arquivos de um diretório de or" +
-    "igem para um destino assim que um arquivo for colocado na pasta de origem\r\n.";
+    "igem para um destino assim que um arquivo for colocado na pasta de origem.\r\n.";
             // 
             // label2
             // 
