@@ -66,17 +66,18 @@
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(13, 13);
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.Location = new System.Drawing.Point(12, 5);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(514, 60);
+            this.label1.Size = new System.Drawing.Size(514, 72);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Este programa sincroniza arquivos copiando/movendo arquivos de um diretório de or" +
-    "igem para um destino assim que um arquivo for colocado na pasta de origem.\r\n.";
+            this.label1.Text = resources.GetString("label1.Text");
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 77);
+            this.label2.Location = new System.Drawing.Point(12, 83);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(129, 17);
             this.label2.TabIndex = 1;
@@ -85,7 +86,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 188);
+            this.label3.Location = new System.Drawing.Point(12, 194);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(132, 17);
             this.label3.TabIndex = 2;
@@ -93,21 +94,26 @@
             // 
             // txtDirOrigem
             // 
-            this.txtDirOrigem.Location = new System.Drawing.Point(16, 98);
+            this.txtDirOrigem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtDirOrigem.Location = new System.Drawing.Point(12, 104);
             this.txtDirOrigem.Name = "txtDirOrigem";
-            this.txtDirOrigem.Size = new System.Drawing.Size(459, 22);
+            this.txtDirOrigem.Size = new System.Drawing.Size(467, 22);
             this.txtDirOrigem.TabIndex = 3;
             // 
             // txtDirDestino
             // 
-            this.txtDirDestino.Location = new System.Drawing.Point(16, 208);
+            this.txtDirDestino.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtDirDestino.Location = new System.Drawing.Point(12, 214);
             this.txtDirDestino.Name = "txtDirDestino";
-            this.txtDirDestino.Size = new System.Drawing.Size(459, 22);
+            this.txtDirDestino.Size = new System.Drawing.Size(467, 22);
             this.txtDirDestino.TabIndex = 4;
             // 
             // btnSelOrigem
             // 
-            this.btnSelOrigem.Location = new System.Drawing.Point(482, 98);
+            this.btnSelOrigem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSelOrigem.Location = new System.Drawing.Point(485, 104);
             this.btnSelOrigem.Name = "btnSelOrigem";
             this.btnSelOrigem.Size = new System.Drawing.Size(42, 23);
             this.btnSelOrigem.TabIndex = 5;
@@ -117,7 +123,8 @@
             // 
             // btnSelDestino
             // 
-            this.btnSelDestino.Location = new System.Drawing.Point(481, 207);
+            this.btnSelDestino.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSelDestino.Location = new System.Drawing.Point(484, 213);
             this.btnSelDestino.Name = "btnSelDestino";
             this.btnSelDestino.Size = new System.Drawing.Size(42, 23);
             this.btnSelDestino.TabIndex = 6;
@@ -127,7 +134,8 @@
             // 
             // btnIniciar
             // 
-            this.btnIniciar.Location = new System.Drawing.Point(391, 401);
+            this.btnIniciar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnIniciar.Location = new System.Drawing.Point(398, 407);
             this.btnIniciar.Name = "btnIniciar";
             this.btnIniciar.Size = new System.Drawing.Size(129, 39);
             this.btnIniciar.TabIndex = 7;
@@ -183,20 +191,22 @@
             this.lblUltimoArquivo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblUltimoArquivo.Location = new System.Drawing.Point(16, 550);
             this.lblUltimoArquivo.Name = "lblUltimoArquivo";
-            this.lblUltimoArquivo.Size = new System.Drawing.Size(509, 28);
+            this.lblUltimoArquivo.Size = new System.Drawing.Size(507, 28);
             this.lblUltimoArquivo.TabIndex = 11;
             // 
             // txtFiltro
             // 
-            this.txtFiltro.Location = new System.Drawing.Point(16, 264);
+            this.txtFiltro.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtFiltro.Location = new System.Drawing.Point(12, 270);
             this.txtFiltro.Name = "txtFiltro";
-            this.txtFiltro.Size = new System.Drawing.Size(507, 22);
+            this.txtFiltro.Size = new System.Drawing.Size(514, 22);
             this.txtFiltro.TabIndex = 12;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(16, 244);
+            this.label6.Location = new System.Drawing.Point(12, 250);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(39, 17);
             this.label6.TabIndex = 13;
@@ -204,7 +214,7 @@
             // 
             // btnCarregar
             // 
-            this.btnCarregar.Location = new System.Drawing.Point(13, 401);
+            this.btnCarregar.Location = new System.Drawing.Point(12, 407);
             this.btnCarregar.Name = "btnCarregar";
             this.btnCarregar.Size = new System.Drawing.Size(129, 39);
             this.btnCarregar.TabIndex = 14;
@@ -215,7 +225,7 @@
             // 
             // btnGravar
             // 
-            this.btnGravar.Location = new System.Drawing.Point(149, 401);
+            this.btnGravar.Location = new System.Drawing.Point(149, 407);
             this.btnGravar.Name = "btnGravar";
             this.btnGravar.Size = new System.Drawing.Size(129, 39);
             this.btnGravar.TabIndex = 15;
@@ -227,7 +237,7 @@
             // lblVersao
             // 
             this.lblVersao.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblVersao.Location = new System.Drawing.Point(306, 601);
+            this.lblVersao.Location = new System.Drawing.Point(304, 601);
             this.lblVersao.Name = "lblVersao";
             this.lblVersao.Size = new System.Drawing.Size(223, 22);
             this.lblVersao.TabIndex = 16;
@@ -237,7 +247,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(213, 131);
+            this.label7.Location = new System.Drawing.Point(213, 137);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(292, 17);
             this.label7.TabIndex = 18;
@@ -245,6 +255,8 @@
             // 
             // cmbTipoSubPasta
             // 
+            this.cmbTipoSubPasta.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbTipoSubPasta.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTipoSubPasta.FormattingEnabled = true;
             this.cmbTipoSubPasta.Items.AddRange(new object[] {
@@ -255,9 +267,9 @@
             "Por ano\\mês\\dia (AAAA\\MM\\DD)",
             "Copiar a última pasta  do arquivo",
             "Copiar as duas últimas pastas do arquivo"});
-            this.cmbTipoSubPasta.Location = new System.Drawing.Point(213, 151);
+            this.cmbTipoSubPasta.Location = new System.Drawing.Point(213, 157);
             this.cmbTipoSubPasta.Name = "cmbTipoSubPasta";
-            this.cmbTipoSubPasta.Size = new System.Drawing.Size(310, 24);
+            this.cmbTipoSubPasta.Size = new System.Drawing.Size(314, 24);
             this.cmbTipoSubPasta.TabIndex = 19;
             // 
             // cmbTipoSync
@@ -268,7 +280,7 @@
             "Copiar arquivos",
             "Mover arquivos",
             "Somente registrar"});
-            this.cmbTipoSync.Location = new System.Drawing.Point(16, 151);
+            this.cmbTipoSync.Location = new System.Drawing.Point(12, 157);
             this.cmbTipoSync.Name = "cmbTipoSync";
             this.cmbTipoSync.Size = new System.Drawing.Size(178, 24);
             this.cmbTipoSync.TabIndex = 21;
@@ -276,7 +288,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(16, 131);
+            this.label8.Location = new System.Drawing.Point(12, 137);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(91, 17);
             this.label8.TabIndex = 20;
@@ -284,7 +296,8 @@
             // 
             // btnLog
             // 
-            this.btnLog.Location = new System.Drawing.Point(481, 362);
+            this.btnLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLog.Location = new System.Drawing.Point(485, 368);
             this.btnLog.Name = "btnLog";
             this.btnLog.Size = new System.Drawing.Size(42, 23);
             this.btnLog.TabIndex = 24;
@@ -294,9 +307,11 @@
             // 
             // txtLog
             // 
-            this.txtLog.Location = new System.Drawing.Point(16, 363);
+            this.txtLog.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtLog.Location = new System.Drawing.Point(12, 369);
             this.txtLog.Name = "txtLog";
-            this.txtLog.Size = new System.Drawing.Size(459, 22);
+            this.txtLog.Size = new System.Drawing.Size(467, 22);
             this.txtLog.TabIndex = 23;
             // 
             // dlgLog
@@ -307,7 +322,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(19, 340);
+            this.label9.Location = new System.Drawing.Point(12, 346);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(353, 17);
             this.label9.TabIndex = 25;
@@ -316,7 +331,7 @@
             // chkRegistraAlteracao
             // 
             this.chkRegistraAlteracao.AutoSize = true;
-            this.chkRegistraAlteracao.Location = new System.Drawing.Point(22, 303);
+            this.chkRegistraAlteracao.Location = new System.Drawing.Point(12, 309);
             this.chkRegistraAlteracao.Name = "chkRegistraAlteracao";
             this.chkRegistraAlteracao.Size = new System.Drawing.Size(151, 21);
             this.chkRegistraAlteracao.TabIndex = 26;
@@ -326,7 +341,7 @@
             // chkRegistraExclusao
             // 
             this.chkRegistraExclusao.AutoSize = true;
-            this.chkRegistraExclusao.Location = new System.Drawing.Point(188, 303);
+            this.chkRegistraExclusao.Location = new System.Drawing.Point(188, 309);
             this.chkRegistraExclusao.Name = "chkRegistraExclusao";
             this.chkRegistraExclusao.Size = new System.Drawing.Size(148, 21);
             this.chkRegistraExclusao.TabIndex = 27;
@@ -336,7 +351,7 @@
             // chkRegistraRenomeacao
             // 
             this.chkRegistraRenomeacao.AutoSize = true;
-            this.chkRegistraRenomeacao.Location = new System.Drawing.Point(351, 303);
+            this.chkRegistraRenomeacao.Location = new System.Drawing.Point(363, 309);
             this.chkRegistraRenomeacao.Name = "chkRegistraRenomeacao";
             this.chkRegistraRenomeacao.Size = new System.Drawing.Size(171, 21);
             this.chkRegistraRenomeacao.TabIndex = 28;
@@ -347,7 +362,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(541, 632);
+            this.ClientSize = new System.Drawing.Size(539, 632);
             this.Controls.Add(this.chkRegistraRenomeacao);
             this.Controls.Add(this.chkRegistraExclusao);
             this.Controls.Add(this.chkRegistraAlteracao);
