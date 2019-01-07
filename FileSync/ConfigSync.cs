@@ -9,6 +9,7 @@ namespace FileSync
 {
     public class ConfigSync
     {
+        
 
         public enum eTipoSubPasta
         {
@@ -24,7 +25,8 @@ namespace FileSync
         public enum eTipoSync
         {   
             Copiar = 0,
-            Mover = 1
+            Mover = 1,
+            SomenteRegistrar = 2
         }
 
         public String Arquivo { get; set; }
@@ -36,9 +38,9 @@ namespace FileSync
         public eTipoSubPasta TipoSubPasta { get; set; }
 
         public eTipoSync TipoSync { get; set; }
-
-
-
+        public bool RegistraRenomeacao { get; set; }
+        public bool RegistraExclusao { get; internal set; }
+        public bool RegistraAlteracao { get; internal set; }
 
         public ConfigSync(string arquivo)
         {
@@ -74,7 +76,17 @@ namespace FileSync
             {
                 this.TipoSync = eTipoSync.Copiar;
             }
-            
+
+            if (config.AppSettings.Settings["RegistraAlteracao"] != null)
+                this.RegistraAlteracao = Boolean.Parse(config.AppSettings.Settings["RegistraAlteracao"].Value);
+
+
+            if (config.AppSettings.Settings["RegistraExclusao"] != null)
+                this.RegistraExclusao = Boolean.Parse(config.AppSettings.Settings["RegistraExclusao"].Value);
+
+            if (config.AppSettings.Settings["RegistraRenomeacao"] != null)
+                this.RegistraRenomeacao = Boolean.Parse(config.AppSettings.Settings["RegistraRenomeacao"].Value);
+
         }
 
         public void Salvar()
@@ -98,6 +110,15 @@ namespace FileSync
 
             config.AppSettings.Settings.Remove("TipoSync");
             config.AppSettings.Settings.Add("TipoSync", TipoSync.ToString());
+
+            config.AppSettings.Settings.Remove("RegistraAlteracao");
+            config.AppSettings.Settings.Add("RegistraAlteracao", RegistraAlteracao.ToString());
+
+            config.AppSettings.Settings.Remove("RegistraExclusao");
+            config.AppSettings.Settings.Add("RegistraExclusao", RegistraExclusao.ToString());
+
+            config.AppSettings.Settings.Remove("RegistraRenomeacao");
+            config.AppSettings.Settings.Add("RegistraRenomeacao", RegistraRenomeacao.ToString());
 
             config.Save(ConfigurationSaveMode.Minimal);
             ConfigurationManager.RefreshSection("appSettings");

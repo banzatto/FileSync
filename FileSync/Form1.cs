@@ -87,18 +87,21 @@ namespace FileSync
                     ret = false;
                 }
             }
-            
-            if (String.IsNullOrWhiteSpace(txtDirDestino.Text))
+
+            if (cmbTipoSync.SelectedIndex != 2)    //Somente registrar
             {
-                MostraErro("Destino não pode estar em branco");
-                ret = false;
-            }
-            else
-            {
-                if (!Directory.Exists(txtDirDestino.Text))
+                if (String.IsNullOrWhiteSpace(txtDirDestino.Text))
                 {
-                    MostraErro("Destino tem que existir");
+                    MostraErro("Destino não pode estar em branco");
                     ret = false;
+                }
+                else
+                {
+                    if (!Directory.Exists(txtDirDestino.Text))
+                    {
+                        MostraErro("Destino tem que existir");
+                        ret = false;
+                    }
                 }
             }
             if (String.IsNullOrWhiteSpace(txtFiltro.Text))
@@ -142,6 +145,9 @@ namespace FileSync
             btnGravar.Enabled = !iniciado;
             cmbTipoSubPasta.Enabled = !iniciado;
             cmbTipoSync.Enabled = !iniciado;
+            chkRegistraAlteracao.Enabled = !iniciado;
+            chkRegistraExclusao.Enabled = !iniciado;
+            chkRegistraRenomeacao.Enabled = !iniciado;
         }
 
         private void bw_DoWork(object sender, DoWorkEventArgs e)
@@ -179,19 +185,22 @@ namespace FileSync
 
         private void Watcher_Renamed(object sender, RenamedEventArgs e)
         {
-            
-
+            if (configsync.RegistraRenomeacao)
+                Log(configsync.Log, $"Arquivo renomeado de {e.OldName} para {e.Name} estava em {e.OldFullPath} para {e.FullPath}");
         }
 
         private void Watcher_Deleted(object sender, FileSystemEventArgs e)
         {
             
+            if (configsync.RegistraExclusao)
+                Log(configsync.Log, $"Arquivo excluido {e.Name} em {e.FullPath}");
 
         }
 
         private void Watcher_Changed(object sender, FileSystemEventArgs e)
         {
-            
+            if (configsync.RegistraAlteracao)                
+                Log(configsync.Log, $"Arquivo alterado {e.Name} em {e.FullPath}");
         }
 
         private void Watcher_Created(object sender, FileSystemEventArgs e)
@@ -256,61 +265,69 @@ namespace FileSync
         {
             bool ret = false;
 
-            DateTime dt = File.GetCreationTime(nomeArq);
-            String subpasta = "";
-            String[] partArq = nomeArq.Split(new Char[] { Path.DirectorySeparatorChar });
-            switch (configsync.TipoSubPasta)
+            if (configsync.TipoSync == ConfigSync.eTipoSync.SomenteRegistrar)
             {
-                case ConfigSync.eTipoSubPasta.AAAA_MM:
-                    subpasta = dt.ToString("yyyy_MM");
-                    break;
-                case ConfigSync.eTipoSubPasta.AAAA_e_MM:
-                    subpasta = $"{dt:yyyy}\\{dt:MM}";
-                    break;
-                case ConfigSync.eTipoSubPasta.AAAA_MM_DD:
-                    subpasta = dt.ToString("yyyy_MM_dd");
-                    break;
-                case ConfigSync.eTipoSubPasta.AAAA_e_MM_e_DD:
-                    subpasta = $"{dt:yyyy}\\{dt:MM}\\{dt:dd}";
-                    break;
-                case ConfigSync.eTipoSubPasta.CopiaUltimaPasta:
-                    if (partArq.Length - 2 >= 1)
-                       subpasta = partArq[partArq.Length - 2];
-                    break;
-                case ConfigSync.eTipoSubPasta.Copia2UltimasPastas:
-                    if (partArq.Length -3 >= 1)
-                        subpasta = partArq[partArq.Length - 3] + '\\' + partArq[partArq.Length - 2];
-                    break;
-            }
-
-            String destino = Path.Combine(configsync.Destino, subpasta);
-            if (!Directory.Exists(destino))
-            {
-                Directory.CreateDirectory(destino);
-                Log(configsync.Log, $"Criado pasta {destino}");
-            }
-            if (configsync.TipoSync == ConfigSync.eTipoSync.Copiar)
-            {
-                try
-                {
-                    File.Copy(nomeArq, Path.Combine(destino, Path.GetFileName(nomeArq)), true);
-                    Log(configsync.Log, $"Arquivo {nomeArq} COPIADO para {destino}");
-                } catch (Exception ex)
-                {
-                    Log(configsync.Log, $"ERRO ao copiar arquivo {nomeArq} para {destino} ERRO: {ex.Message}");
-                }
-                
+                Log(configsync.Log, $"Feito Download do arquivo {nomeArq}");
             }
             else
             {
-                try
+                DateTime dt = File.GetCreationTime(nomeArq);
+                String subpasta = "";
+                String[] partArq = nomeArq.Split(new Char[] { Path.DirectorySeparatorChar });
+                switch (configsync.TipoSubPasta)
                 {
-                    File.Move(nomeArq, Path.Combine(destino, Path.GetFileName(nomeArq)));
-                    Log(configsync.Log, $"Arquivo {nomeArq} MOVIDO para {destino}");
+                    case ConfigSync.eTipoSubPasta.AAAA_MM:
+                        subpasta = dt.ToString("yyyy_MM");
+                        break;
+                    case ConfigSync.eTipoSubPasta.AAAA_e_MM:
+                        subpasta = $"{dt:yyyy}\\{dt:MM}";
+                        break;
+                    case ConfigSync.eTipoSubPasta.AAAA_MM_DD:
+                        subpasta = dt.ToString("yyyy_MM_dd");
+                        break;
+                    case ConfigSync.eTipoSubPasta.AAAA_e_MM_e_DD:
+                        subpasta = $"{dt:yyyy}\\{dt:MM}\\{dt:dd}";
+                        break;
+                    case ConfigSync.eTipoSubPasta.CopiaUltimaPasta:
+                        if (partArq.Length - 2 >= 1)
+                            subpasta = partArq[partArq.Length - 2];
+                        break;
+                    case ConfigSync.eTipoSubPasta.Copia2UltimasPastas:
+                        if (partArq.Length - 3 >= 1)
+                            subpasta = partArq[partArq.Length - 3] + '\\' + partArq[partArq.Length - 2];
+                        break;
                 }
-                catch (Exception ex)
+
+                String destino = Path.Combine(configsync.Destino, subpasta);
+                if (!Directory.Exists(destino))
                 {
-                    Log(configsync.Log, $"ERRO ao mover arquivo {nomeArq} para {destino} ERRO: {ex.Message}");
+                    Directory.CreateDirectory(destino);
+                    Log(configsync.Log, $"Criado pasta {destino}");
+                }
+                if (configsync.TipoSync == ConfigSync.eTipoSync.Copiar)
+                {
+                    try
+                    {
+                        File.Copy(nomeArq, Path.Combine(destino, Path.GetFileName(nomeArq)), true);
+                        Log(configsync.Log, $"Arquivo {nomeArq} COPIADO para {destino}");
+                    }
+                    catch (Exception ex)
+                    {
+                        Log(configsync.Log, $"ERRO ao copiar arquivo {nomeArq} para {destino} ERRO: {ex.Message}");
+                    }
+
+                }
+                else
+                {
+                    try
+                    {
+                        File.Move(nomeArq, Path.Combine(destino, Path.GetFileName(nomeArq)));
+                        Log(configsync.Log, $"Arquivo {nomeArq} MOVIDO para {destino}");
+                    }
+                    catch (Exception ex)
+                    {
+                        Log(configsync.Log, $"ERRO ao mover arquivo {nomeArq} para {destino} ERRO: {ex.Message}");
+                    }
                 }
             }
 
@@ -331,6 +348,10 @@ namespace FileSync
             configsync.Log = txtLog.Text;
             configsync.TipoSubPasta = (ConfigSync.eTipoSubPasta)cmbTipoSubPasta.SelectedIndex;
             configsync.TipoSync = (ConfigSync.eTipoSync)cmbTipoSync.SelectedIndex;
+
+            configsync.RegistraAlteracao = chkRegistraAlteracao.Checked;
+            configsync.RegistraExclusao = chkRegistraExclusao.Checked;
+            configsync.RegistraRenomeacao = chkRegistraRenomeacao.Checked;
 
             if (GravarDisco)
                 configsync.Salvar();
@@ -355,6 +376,10 @@ namespace FileSync
             txtLog.Text = configsync.Log;
             cmbTipoSubPasta.SelectedIndex = (int)configsync.TipoSubPasta;
             cmbTipoSync.SelectedIndex = (int)configsync.TipoSync;
+            chkRegistraAlteracao.Checked = configsync.RegistraAlteracao;
+            chkRegistraRenomeacao.Checked = configsync.RegistraRenomeacao;
+            chkRegistraExclusao.Checked = configsync.RegistraExclusao;
+
         }
 
         private void frmFileSync_FormClosing(object sender, FormClosingEventArgs e)
